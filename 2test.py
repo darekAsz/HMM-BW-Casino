@@ -15,9 +15,10 @@ h = hmm.HMM(A, B, pi)
 
 # print observations_data
 # print states_data
-for i in range(1000):
-    observations_data = h.simulate(200)
-    for j in range(200):
+for i in range(100):
+    size = 100
+    observations_data = np.empty([size], dtype=int)
+    for j in range(size):
         rand = random.randint(1, 100)
         if rand <= 10:
             observations_data[j] = 0
@@ -25,9 +26,9 @@ for i in range(1000):
             observations_data[j] = 1
         elif rand <= 30:
             observations_data[j] = 2
-        elif rand <= 49:
+        elif rand <= 40:
             observations_data[j] = 3
-        elif rand <= 55:
+        elif rand <= 50:
             observations_data[j] = 4
         else:
             observations_data[j] = 5
