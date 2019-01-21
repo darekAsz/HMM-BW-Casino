@@ -70,7 +70,7 @@ class HMM:
         for t in range(1, T):
             states[t] = draw_from(self.A[states[t - 1], :])
             observations[t] = draw_from(self.B[states[t], :])
-        return observations, states
+        return observations
 
     def baum_welch_train(self, observations, criterion=0.05):
         n_states = self.A.shape[0]
