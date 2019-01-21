@@ -9,7 +9,7 @@ import random
 
 states = ('Healthy', 'Fever')
 
-observations = ('1', '2', '3', '4','5','6')
+observations = ('1', '2', '3', '4', '5', '6')
 
 start_probability = {'Healthy': 0.6, 'Fever': 0.4}
 
@@ -19,8 +19,8 @@ transition_probability = {
 }
 
 emission_probability = {
-    'Healthy': {'1': 0.16, '2': 0.16, '3': 0.16, '4':0.16, '5':0.16, '6':0.16},
-    'Fever': {'1': 0.1, '2': 0.1, '3': 0.1, '4':0.1, '5':0.1, '6':0.5},
+    'Healthy': {'1': 0.16, '2': 0.16, '3': 0.16, '4': 0.16, '5': 0.16, '6': 0.16},
+    'Fever': {'1': 0.1, '2': 0.1, '3': 0.1, '4': 0.1, '5': 0.1, '6': 0.5},
 }
 
 
@@ -71,46 +71,44 @@ pi = convert_map_to_vector(start_probability, states_label_index)
 
 h = hmm.HMM(A, B, pi)
 
-#print " " * 7, " ".join(("%10s" % observations_index_label[i]) for i in observations_index)
-#for s in range(0, 2):
+# print " " * 7, " ".join(("%10s" % observations_index_label[i]) for i in observations_index)
+# for s in range(0, 2):
 #    print "%7s: " % states_index_label[s] + " ".join("%10s" % ("%f" % v) for v in V[s])
-#print '\nThe most possible states and probability are:'
+# print '\nThe most possible states and probability are:'
 
-#for s in ss:
+# for s in ss:
 #    print states_index_label[s],
-#print p
-
+# print p
 
 
 A = np.array([[0.5, 0.5], [0.5, 0.5]])
-B = np.array([[0.16, 0.16, 0.16,0.16,0.16,0.16],[0.16, 0.16, 0.16,0.16,0.16,0.16]])
+B = np.array([[0.16, 0.16, 0.16, 0.16, 0.16, 0.16], [0.16, 0.16, 0.16, 0.16, 0.16, 0.16]])
 pi = np.array([0.5, 0.5])
-
-
 
 # run a baum_welch_train
 
 
-#print observations_data
-#print states_data
-for i in range(200):
-	observations_data, states_data = h.simulate(100)
-	for i in range(100):
-		rand = random.random()
-		if rand <= 0.1:
-			observations_data[i]=0
-		elif rand <= 0.2:
-			observations_data[i]=1
-		elif rand <= 0.3:
-			observations_data[i]=2
-		elif rand <= 0.4:
-			observations_data[i]=3
-		elif rand <= 0.5:
-			observations_data[i]=4
-		elif rand <= 1.0:
-			observations_data[i]=5
-	#print observations_data
-	guess = hmm.HMM(A,B,pi)
-	A, B, pi = guess.baum_welch_train(observations_data)
+# print observations_data
+# print states_data
+for i in range(100):
+    observations_data, states_data = h.simulate(100)
+    for j in range(100):
+        print(j)
+        rand = random.random()
+        if rand <= 0.1:
+            observations_data[j] = 0
+        elif rand <= 0.15:
+            observations_data[j] = 1
+        elif rand <= 0.2:
+            observations_data[j] = 2
+        elif rand <= 0.4:
+            observations_data[j] = 3
+        elif rand <= 0.5:
+            observations_data[j] = 4
+        elif rand <= 1.0:
+            observations_data[j] = 5
+    # print observations_data
+    guess = hmm.HMM(A, B, pi)
+    A, B, pi = guess.baum_welch_train(observations_data)
 
-print B
+print(B)
